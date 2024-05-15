@@ -1,0 +1,12 @@
+apiVersion: project.openshift.io/v1
+kind: Project
+metadata:
+  annotations:
+    openshift.io/description: "The Project for the Event Streams Cluster"
+    openshift.io/display-name: "Event Streams Project"
+  labels:
+    kubernetes.io/metadata.name: event-streams
+  name: event-streams
+spec:
+  finalizers:
+  - kubernetes
