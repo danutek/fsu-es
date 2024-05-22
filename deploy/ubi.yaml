@@ -1,0 +1,27 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: ubi9
+  namespace: gitops
+  annotations:
+    argocd.argoproj.io/sync-wave: "3"
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: ubi9
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: ubi9
+    spec:
+      containers:
+        - name: ubi
+          image: 'registry.access.redhat.com/ubi9/ubi-micro:latest'
+          command:
+            - /bin/sh
+            - '-c'
+            - |
+              sleep infinity
+
