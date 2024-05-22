@@ -1,0 +1,13 @@
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: gitops
+  labels:
+    kubernetes.io/metadata.name: gitops
+  annotations:
+    openshift.io/description: 'Test Namespace for GitOps'
+    openshift.io/display-name: 'GitOps Project'
+    argocd.argoproj.io/sync-wave: "1"
+spec:
+  finalizers:
+    - kubernetes
