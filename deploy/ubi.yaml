@@ -4,7 +4,7 @@ metadata:
   name: ubi9
   namespace: gitops
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: ubi9
