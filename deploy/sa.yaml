@@ -1,7 +1,0 @@
-kind: ServiceAccount
-apiVersion: v1
-metadata:
-  name: gitops
-  namespace: gitops
-  annotations:
-    argocd.argoproj.io/sync-wave: "2"
