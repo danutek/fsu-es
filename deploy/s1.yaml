@@ -5,6 +5,9 @@ metadata:
   namespace: gitops
   labels:
     app: httpd
+  annotations:
+    argocd.argoproj.io/sync-wave: "4"
+    
 spec:
   ports:
     - port: 8080
