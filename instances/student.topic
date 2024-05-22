@@ -1,0 +1,23 @@
+apiVersion: eventstreams.ibm.com/v1beta2
+kind: KafkaTopic
+metadata:
+  creationTimestamp: "2024-04-29T17:25:16Z"
+  generation: 1
+  labels:
+    eventstreams.ibm.com/cluster: fsu-es
+  name: student.kafka.student
+  namespace: event-streams
+  resourceVersion: "32637241"
+  uid: fb1bdf8f-04eb-46f0-bee2-851098e59082
+spec:
+  config: {}
+  partitions: 1
+  replicas: 1
+  topicName: student.kafka.student
+status:
+  conditions:
+  - lastTransitionTime: "2024-04-29T17:25:16.604624473Z"
+    status: "True"
+    type: Ready
+  observedGeneration: 1
+  topicName: student.kafka.student

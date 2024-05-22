@@ -1,0 +1,86 @@
+apiVersion: eventstreams.ibm.com/v1beta2
+kind: KafkaConnect
+metadata:
+  annotations:
+    eventstreams.ibm.com/use-connector-resources: "true"
+    strimzi.io/use-connector-resources: "true"
+  creationTimestamp: "2024-04-29T17:00:01Z"
+  generation: 1
+  labels:
+    backup.eventstreams.ibm.com/component: kafkaconnect
+  name: fsu-kc
+  namespace: kafka-connect
+  resourceVersion: "32623442"
+  uid: c39bb8fb-651b-4676-b234-77c26d7f98df
+spec:
+  bootstrapServers: fsu-es-kafka-bootstrap.event-streams:9092
+  config:
+    config.storage.replication.factor: 1
+    config.storage.topic: connect-configs
+    group.id: connect-cluster
+    offset.storage.replication.factor: 1
+    offset.storage.topic: connect-offsets
+    status.storage.replication.factor: 1
+    status.storage.topic: connect-status
+  image: quay.io/danutek_us/kc:3
+  replicas: 1
+  resources:
+    limits:
+      cpu: 2000m
+      memory: 2Gi
+    requests:
+      cpu: 1000m
+      memory: 2Gi
+  template:
+    connectContainer:
+      securityContext:
+        allowPrivilegeEscalation: false
+        capabilities:
+          drop:
+          - ALL
+        privileged: false
+        readOnlyRootFilesystem: true
+        runAsNonRoot: true
+    pod:
+      metadata:
+        annotations:
+          cloudpakId: c8b82d189e7545f0892db9ef2731b90d
+          cloudpakName: IBM Cloud Pak for Integration
+          eventstreams.production.type: CloudPakForIntegrationNonProduction
+          productChargedContainers: fsu-kc-connect
+          productCloudpakRatio: "2:1"
+          productID: 2a79e49111f44ec3acd89608e56138f5
+          productMetric: VIRTUAL_PROCESSOR_CORE
+          productName: IBM Event Streams for Non Production
+          productVersion: 11.3.2
+status:
+  conditions:
+  - lastTransitionTime: "2024-04-29T17:01:03.241978736Z"
+    status: "True"
+    type: Ready
+  connectorPlugins:
+  - class: com.ibm.eventstreams.connect.mqsink.MQSinkConnector
+    type: sink
+    version: 2.1.0
+  - class: com.snowflake.kafka.connector.SnowflakeSinkConnector
+    type: sink
+    version: 2.2.1
+  - class: com.ibm.eventstreams.connect.mqsource.MQSourceConnector
+    type: source
+    version: 2.0.0
+  - class: io.debezium.connector.mysql.MySqlConnector
+    type: source
+    version: 2.6.1.Final
+  - class: org.apache.kafka.connect.mirror.MirrorCheckpointConnector
+    type: source
+    version: 3.6.1
+  - class: org.apache.kafka.connect.mirror.MirrorHeartbeatConnector
+    type: source
+    version: 3.6.1
+  - class: org.apache.kafka.connect.mirror.MirrorSourceConnector
+    type: source
+    version: 3.6.1
+  labelSelector: eventstreams.ibm.com/kind=KafkaConnect,eventstreams.ibm.com/name=fsu-kc-connect,eventstreams.ibm.com/cluster=fsu-kc
+  observedGeneration: 1
+  replicas: 1
+  url: http://fsu-kc-connect-api.kafka-connect.svc:8083
